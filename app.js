@@ -1,4 +1,7 @@
 const express = require('express');
+const app = express()
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -11,8 +14,9 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const routes = require('./routes/index');
 
-const app = express()
 
+require('./sockets/socket')(io);
+require('./config/passport')(passport);
 // view engine setup
 app.set('views', path.join(__dirname, 'views')); // this is the folder where we keep our pug files
 app.set('view engine', 'pug'); // we use the engine pug, mustache or EJS work great too
@@ -54,4 +58,4 @@ app.use((req, res, next) => {
 
 app.use('/', routes);
 
-module.exports = app;
+module.exports = server;

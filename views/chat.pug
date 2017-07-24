@@ -1,0 +1,17 @@
+extends layout
+
+block scripts
+    script(src="/socket.io/socket.io.js")
+    script(src="/js/soc.js")
+
+block content
+    .ui.segment
+        h1(style="font-family:'Permanent Marker', cursive;font-size:42px") ChatAoo 
+        .ui.vertical.pointing.menu
+          a.active.item
+            | Pratiman Joshi
+          a.item
+            | Rashi Pandey
+          a.item
+            | Rakshit Gaira
+
