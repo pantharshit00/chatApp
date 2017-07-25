@@ -1,7 +1,7 @@
 extends layout
 
 block scripts
-    script $('.menu .item').tab();
+    script $(function(){ $('.menu .item').tab(); })
     
 block content
     .ui.centered.card
@@ -18,8 +18,8 @@ block content
                         label Password
                         input(type='password', name='password', placeholder='Password')
                     button.ui.button(type='submit') Login
-            .ui.bottom.attached.tab.segment(data-tab='Second')
-                form.ui.form
+            .ui.bottom.attached.tab.segment(data-tab='second')
+                form.ui.form(action="/register" method="POST")
                     .field
                         label Name
                         input(type='text', name='name', placeholder='Name')

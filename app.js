@@ -8,11 +8,12 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
-const util = require('util');
+const promisify = require('es6-promisify')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const routes = require('./routes/index');
+const validator = require('express-validator');
 
 
 require('./sockets/socket')(io);
@@ -51,10 +52,12 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  req.login = util.promisify(req.login);
+  req.login = promisify(req.login);
   next();
 });
 
+
+app.use(validator());
 
 app.use('/', routes);
 

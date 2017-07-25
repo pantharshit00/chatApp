@@ -1,5 +1,6 @@
 // requires the model with Passport-Local Mongoose plugged in
-const User = require('../models/User');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
 
 // use static authenticate method of model in LocalStrategy
 module.exports = (passport) => {
