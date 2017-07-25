@@ -1,1 +1,35 @@
 extends layout
+
+block scripts
+    script $('.menu .item').tab();
+    
+block content
+    .ui.centered.card
+        .content
+            .ui.top.attached.tabular.menu
+                a.item.active(data-tab='first') Login
+                a.item(data-tab='second') Signup
+            .ui.bottom.attached.tab.segment.active(data-tab='first')
+                form.ui.form
+                    .field
+                        label Username
+                        input(type='text', name='username', placeholder='Username')
+                    .field
+                        label Password
+                        input(type='password', name='password', placeholder='Password')
+                    button.ui.button(type='submit') Login
+            .ui.bottom.attached.tab.segment(data-tab='Second')
+                form.ui.form
+                    .field
+                        label Name
+                        input(type='text', name='name', placeholder='Name')
+                    .field
+                        label Username
+                        input(type='text', name='username', placeholder='Username')
+                    .field
+                        label Password
+                        input(type='password', name='password', placeholder='Password')
+                    .field
+                        label Confirm Password
+                        input(type='password', name='password-confirm', placeholder='Confirm Password')
+                    button.ui.button(type='submit') Sign Up
