@@ -3,14 +3,11 @@ extends layout
 block scripts
     script(src="/socket.io/socket.io.js")
     script(src="/js/soc.js")
+    script window.onload = function(){ sessionStorage.setItem('id',"#{user._id}") }
 
 block content
     .ui.segment
         .ui.vertical.pointing.menu
-          a.active.item
-            | Pratiman Joshi
-          a.item
-            | Rashi Pandey
-          a.item
-            | Rakshit Gaira
+          each user in users
+            a.item(data-id=`${user._id}`) #{user.name}
 

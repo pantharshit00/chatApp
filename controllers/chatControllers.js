@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+
 exports.handleIndex = (req, res)=>{
     if(req.user){
         res.redirect('/chat')
@@ -8,8 +11,15 @@ exports.handleIndex = (req, res)=>{
     })
 }
 
-exports.handleChat = ()=>{
+exports.handleChat = async (req,res)=>{
+    const users = await User.aggregate({
+        $project:{
+            _id:1,
+            name:1
+        }
+    });
     res.render('chat',{
-        title:'Chat'
+        title:'Chat',
+        users
     })
 }
