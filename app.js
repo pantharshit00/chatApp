@@ -14,6 +14,7 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const routes = require('./routes/index');
 const validator = require('express-validator');
+const { notFound, flashValidationErrors, productionErrors} = require('./config/errors');
 
 
 require('./sockets/socket')(io);
@@ -60,5 +61,11 @@ app.use((req, res, next) => {
 app.use(validator());
 
 app.use('/', routes);
+
+app.use(notFound);
+
+app.use(flashValidationErrors);
+
+app.use(productionErrors);
 
 module.exports = server;

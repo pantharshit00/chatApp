@@ -10,7 +10,7 @@ block content
                 a.item.active(data-tab='first') Login
                 a.item(data-tab='second') Signup
             .ui.bottom.attached.tab.segment.active(data-tab='first')
-                form.ui.form
+                form.ui.form(action="/login" method="POST")
                     .field
                         label Username
                         input(type='text', name='username', placeholder='Username')

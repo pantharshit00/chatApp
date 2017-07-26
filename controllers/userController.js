@@ -14,8 +14,9 @@ exports.validateRegister = async (req, res, next) => {
 
   const errors = await req.getValidationResult();
   if (!errors.isEmpty()) {
-    console.log(errors.array());
-    res.render('index', { title: 'Register', body: req.body});
+    const error = errors.array();
+    req.flash('error', error.map(err => err.msg));
+    res.render('index', { title: 'Register', flashes:req.flash()});
     return; // stop the fn from running
   }
   next(); // there were no errors!

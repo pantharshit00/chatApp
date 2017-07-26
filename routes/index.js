@@ -8,7 +8,11 @@ const authController = require('../controllers/authController');
 router.get('/',chatController.handleIndex);
 router.post('/register',err.catchErrors(userController.validateRegister),
                         err.catchErrors(userController.register),
-                        err.catchErrors(authController.login)
+                        authController.login
 )
+router.post('/login',authController.login);
+
+router.get('/chat',authController.isLoggedIn, chatController.handleChat);
+
 
 module.exports = router;

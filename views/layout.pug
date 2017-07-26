@@ -7,14 +7,33 @@ html
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js')
     link(href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet")
+    script.
+      $(function(){
+        $('.message .close')
+          .on('click', function() {
+            $(this)
+              .closest('.message')
+              .transition('fade');
+          });
+      });
     block scripts
   body
-    block header
+    if user
       .ui.secondary.pointing.menu
         a.active.item
           | Home
         .right.menu
           a.item
             | Logout
+    block messages
+      if locals.flashes
+        - const categories = Object.keys(locals.flashes)
+        .ui.card.centered(style="box-shadow:none")
+          each category in categories
+            each message in flashes[categories]
+                .ui.message(class=`${category}`)
+                  i.close.icon
+                  .header #{message}
+    h1(style="font-family:'Permanent Marker', cursive;font-size:42px; text-align: center") ChatAoo 
     block content
       p This is default
