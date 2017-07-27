@@ -7,7 +7,8 @@ block scripts
 
 block content
     .ui.segment
-        .ui.vertical.pointing.menu
+        .ui.vertical.pointing.menu  
           each user in users
-            a.item(data-id=`${user._id}`) #{user.name}
+            unless (locals.user._id.equals(user._id))
+                a.item(data-id=`${user._id}`) #{user.name}
 

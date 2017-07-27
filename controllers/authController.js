@@ -13,10 +13,16 @@ exports.login = passport.authenticate('local', {
 
 
 exports.isLoggedIn = (req,res,next) =>{
-  if(req.user)
+  if(req.isAuthenticated())
     next()
   else{
     req.flash('error','You are required to login in order to see that')
     res.redirect('/');
   }
 }
+
+exports.logout = (req, res) => {
+  req.logout();
+  req.flash('success', 'You are now logged out! 👋');
+  res.redirect('/');
+};

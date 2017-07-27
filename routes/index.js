@@ -14,5 +14,7 @@ router.post('/login',authController.login);
 
 router.get('/chat',authController.isLoggedIn, chatController.handleChat);
 
+router.get('/logout', authController.logout);
+
 
 module.exports = router;
