@@ -1,5 +1,18 @@
 let online = [];
 
+let avatars = [
+    "https://semantic-ui.com/images/avatar/small/matt.jpg",
+    "https://semantic-ui.com/images/avatar/small/elliot.jpg",
+    "https://semantic-ui.com/images/avatar/small/jenny.jpg",
+    "https://semantic-ui.com/images/avatar/small/joe.jpg",
+    "https://semantic-ui.com/images/avatar2/small/elyse.png",
+    "https://semantic-ui.com/images/avatar2/small/matthew.png",
+    "https://semantic-ui.com/images/avatar2/small/kristy.png",
+    "https://semantic-ui.com/images/avatar2/small/eve.png",
+    "https://semantic-ui.com/images/avatar/small/helen.jpg",
+    "https://semantic-ui.com/images/avatar/small/justen.jpg"
+]
+
 module.exports = function(io){
  io.sockets.on('connection',function(socket){
     socket.emit('get_id', null);

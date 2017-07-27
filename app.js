@@ -43,11 +43,24 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+  
+let avatars = [
+    "https://semantic-ui.com/images/avatar/small/matt.jpg",
+    "https://semantic-ui.com/images/avatar/small/elliot.jpg",
+    "https://semantic-ui.com/images/avatar/small/jenny.jpg",
+    "https://semantic-ui.com/images/avatar/small/joe.jpg",
+    "https://semantic-ui.com/images/avatar2/small/elyse.png",
+    "https://semantic-ui.com/images/avatar2/small/matthew.png",
+    "https://semantic-ui.com/images/avatar2/small/kristy.png",
+    "https://semantic-ui.com/images/avatar2/small/eve.png",
+    "https://semantic-ui.com/images/avatar/small/helen.jpg",
+    "https://semantic-ui.com/images/avatar/small/justen.jpg"
+]
 
 app.use((req, res, next) => {
   res.locals.flashes = req.flash();
   res.locals.user = req.user || null;
+  res.locals.a = avatars
   res.locals.currentPath = req.path;
   next();
 });

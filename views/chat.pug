@@ -7,8 +7,21 @@ block scripts
 
 block content
     .ui.segment
-        .ui.vertical.pointing.menu  
-          each user in users
-            unless (locals.user._id.equals(user._id))
-                a.item(data-id=`${user._id}`) #{user.name}
+        .ui.stackable.twelve.column.grid
+            .five.column
+                .ui.vertical.menu  
+                    each user in users
+                        unless (locals.user._id.equals(user._id))
+                            a.item(data-id=`${user._id}`) #{user.name}
+            .ten.column
+                .ui.feed
+                    .event
+                        - const avatar = Math.floor(Math.random() * 10)
+                        .label
+                            img(src=a[avatar])
+                        .content
+                            .summary
+                                | Hello
+                                .date
+                                | 3 days ago
 
