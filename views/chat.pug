@@ -1,27 +1,32 @@
 extends layout
 
 block scripts
+    link(rel="stylesheet" href='/css/grid.min.css')
     script(src="/socket.io/socket.io.js")
     script(src="/js/soc.js")
-    script window.onload = function(){ sessionStorage.setItem('id',"#{user._id}") }
+    script window.id = "#{user._id}"
 
 block content
     .ui.segment
-        .ui.stackable.twelve.column.grid
-            .five.column
-                .ui.vertical.menu  
+        .row
+            .col-lg-3.col-md-3.col-sm-12
+                .ui.vertical.menu(style="margin:0 10px 25px 0")  
                     each user in users
                         unless (locals.user._id.equals(user._id))
                             a.item(data-id=`${user._id}`) #{user.name}
-            .ten.column
+            .col-md-8.col-lg-8.col-sm-12
                 .ui.feed
                     .event
-                        - const avatar = Math.floor(Math.random() * 10)
                         .label
-                            img(src=a[avatar])
+                            img(src=a[user.acount])
                         .content
                             .summary
                                 | Hello
                                 .date
                                 | 3 days ago
+                .ui.icon.input.fluid(style="margin-top: calc(100vh - 40%);")
+                    input(type='text', placeholder='Search a very wide input...')
+                    i.send.icon
 
+                                
+                
