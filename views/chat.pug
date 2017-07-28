@@ -4,12 +4,15 @@ block scripts
     link(rel="stylesheet" href='/css/grid.min.css')
     script(src="/socket.io/socket.io.js")
     script(src="/js/soc.js")
-    script window.onload = function(){ sessionStorage.setItem('id',"#{user._id}") }
+    script window.id = "#{user._id}"
 
 block content
     .ui.segment
-        .ui.vertical.menu  
-            each user in users
-                unless (locals.user._id.equals(user._id))
-                    a.item(data-id=`${user._id}`) #{user.name}
-    
+        .container
+            .row
+                .col-md-4
+                    .ui.vertical.menu  
+                        each user in users
+                            unless (locals.user._id.equals(user._id))
+                                a.item(data-id=`${user._id}`) #{user.name}
+            
