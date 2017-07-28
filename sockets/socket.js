@@ -1,4 +1,7 @@
 let online = [];
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+
 
 let avatars = [
     "https://semantic-ui.com/images/avatar/small/matt.jpg",
@@ -28,6 +31,15 @@ module.exports = function(io){
         let pos = online.map(function(e) { return e.soc; }).indexOf(socket.id);
         online.splice(pos,1);
         io.emit('online',online);
+    })
+    socket.on('msg_rec',async (data)=>{
+        const sender = await User.findOne({_id: data.id});
+        io.emit('message',{
+            aid: sender.acount,
+            name: sender.name,
+            message: data.message,
+            date: '5:30pm'
+        })
     })
  })   
 }

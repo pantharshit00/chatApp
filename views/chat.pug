@@ -15,18 +15,14 @@ block content
                         unless (locals.user._id.equals(user._id))
                             a.item(data-id=`${user._id}`) #{user.name}
             .col-md-8.col-lg-8.col-sm-12
-                .ui.feed
-                    .event
-                        .label
-                            img(src=a[user.acount])
-                        .content
-                            .summary
-                                | Hello
-                                .date
-                                | 3 days ago
-                .ui.icon.input.fluid(style="margin-top: calc(100vh - 40%);")
-                    input(type='text', placeholder='Search a very wide input...')
-                    i.send.icon
+                h1(style="font-family:'Permanent Marker', cursive") All People
+                .ui.divider
+                #messages    
+                .ui.divider
+                form#chat
+                    .ui.icon.input.fluid
+                        input#ms(type='text', placeholder='Write a message')
+                        i.send.icon
 
-                                
-                
+                                    
+                    
