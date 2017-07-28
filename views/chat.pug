@@ -8,11 +8,25 @@ block scripts
 
 block content
     .ui.segment
-        .container
-            .row
-                .col-md-4
-                    .ui.vertical.menu  
-                        each user in users
-                            unless (locals.user._id.equals(user._id))
-                                a.item(data-id=`${user._id}`) #{user.name}
-            
+        .row
+            .col-lg-3.col-md-3.col-sm-12
+                .ui.vertical.menu(style="margin:0 10px 25px 0")  
+                    each user in users
+                        unless (locals.user._id.equals(user._id))
+                            a.item(data-id=`${user._id}`) #{user.name}
+            .col-md-8.col-lg-8.col-sm-12
+                .ui.feed
+                    .event
+                        .label
+                            img(src=a[user.acount])
+                        .content
+                            .summary
+                                | Hello
+                                .date
+                                | 3 days ago
+                .ui.icon.input.fluid(style="margin-top: calc(100vh - 40%);")
+                    input(type='text', placeholder='Search a very wide input...')
+                    i.send.icon
+
+                                
+                
