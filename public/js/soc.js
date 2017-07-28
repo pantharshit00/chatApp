@@ -1,4 +1,4 @@
-var socket = io.connect('http://192.168.43.180:7777');
+var socket = io.connect('http://192.168.43.128:7777');
 socket.on('get_id', function () {
     var d = sessionStorage.getItem('id');
     socket.emit('set_id', { id: d });
