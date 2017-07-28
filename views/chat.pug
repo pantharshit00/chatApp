@@ -1,27 +1,15 @@
 extends layout
 
 block scripts
+    link(rel="stylesheet" href='/css/grid.min.css')
     script(src="/socket.io/socket.io.js")
     script(src="/js/soc.js")
     script window.onload = function(){ sessionStorage.setItem('id',"#{user._id}") }
 
 block content
     .ui.segment
-        .ui.stackable.twelve.column.grid
-            .five.column
-                .ui.vertical.menu  
-                    each user in users
-                        unless (locals.user._id.equals(user._id))
-                            a.item(data-id=`${user._id}`) #{user.name}
-            .ten.column
-                .ui.feed
-                    .event
-                        - const avatar = Math.floor(Math.random() * 10)
-                        .label
-                            img(src=a[avatar])
-                        .content
-                            .summary
-                                | Hello
-                                .date
-                                | 3 days ago
-
+        .ui.vertical.menu  
+            each user in users
+                unless (locals.user._id.equals(user._id))
+                    a.item(data-id=`${user._id}`) #{user.name}
+    
