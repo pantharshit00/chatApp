@@ -20,8 +20,9 @@ const User = new Schema({
     }
 });
 
-User.pre('save',function(){
+User.pre('save',function(next){
     this.acount = Math.floor(Math.random() * 10)
+    next()
 })
 
 User.plugin(passportLocalMongoose, { usernameField: 'username' });
