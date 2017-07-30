@@ -1,28 +1,32 @@
 extends layout
 
 block scripts
-    link(rel="stylesheet" href='/css/grid.min.css')
     script(src="/socket.io/socket.io.js")
-    script(src="/js/soc.js")
-    script window.id = "#{user._id}"
+    script(src="/js/soc.un.js")
+    script window.id = "#{user._id}",window.name= "#{user.name}"
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/components/feed.min.css")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
 
 block content
-    .ui.segment
+    .container-fluid
         .row
-            .col-lg-3.col-md-3.col-sm-12
-                .ui.vertical.menu(style="margin:0 10px 25px 0")  
+            .col-md-2.col-lg-2.col-sm-12.animated.rollIn
+                .list-group
                     each user in users
                         unless (locals.user._id.equals(user._id))
-                            a.item(data-id=`${user._id}`) #{user.name}
-            .col-md-8.col-lg-8.col-sm-12
-                h1(style="font-family:'Permanent Marker', cursive") All People
-                .ui.divider
-                #messages    
-                .ui.divider
-                form#chat
-                    .ui.icon.input.fluid
-                        input#ms(type='text', placeholder='Write a message')
-                        i.send.icon
+                            a.list-group-item(data-id=`${user._id}`) #{user.name}
+            .col-md-8.col-lg-8.col-sm-12.animated.rubberBand
+                h1(style="font-family: 'Audiowide', cursive;") All People
+                .card
+                    .card-block#messages(style="height:310px;overflow-y:scroll")
+                #typers    
+                form#chat.mt-2
+                    .input-group
+                        input#ms.form-control(type='text', placeholder='Type here....')
+                        span.input-group-btn
+                            button.btn.btn-success(type='submit') 
+                                i.fa.fa-paper-plane
+
 
                                     
                     
