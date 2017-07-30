@@ -3,37 +3,35 @@ html
   head
     title #{title || 'Chat App'} | ChatAoo
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css')
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js')
-    link(href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet")
-    script.
-      $(function(){
-        $('.message .close')
-          .on('click', function() {
-            $(this)
-              .closest('.message')
-              .transition('fade');
-          });
-      });
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Audiowide', rel='stylesheet')
+    link(href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet")
+    script(src='https://code.jquery.com/jquery-3.1.1.slim.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js')
     block scripts
   body
     if user
-      .ui.secondary.pointing.menu
-        a.active.item
-          | Home
-        .right.menu
-          a.item(href="/logout")
-            | Logout
+      nav.navbar.navbar-toggleable-md.navbar-light.bg-faded.animated.slideInDown(style="margin-bottom:5px;")
+        button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        a.navbar-brand(href='#' style="font-family: 'Audiowide', cursive;") ChatAoo
+        #navbarSupportedContent.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item.active
+              a.nav-link(href='#')
+                | Home 
+                span.sr-only (current)
+          .navbar-nav      
+            a.nav-link.nav-item(href="/logout") Logout
     block messages
       if locals.flashes
         - const categories = Object.keys(locals.flashes)
-        .ui.card.centered(style="box-shadow:none")
           each category in categories
             each message in flashes[categories]
-                .ui.message(class=`${category}`)
-                  i.close.icon
-                  .header #{message}
-    h1(style="font-family:'Permanent Marker', cursive;font-size:42px; text-align: center") ChatAoo 
+                  .alert.text-center.alert-dismissible.fade.show(class=`alert-${category == 'error' ? 'danger' : category }`) 
+                    button.close(type='button', data-dismiss='alert', aria-label='Close')
+                      span(aria-hidden='true') ×
+                    | #{message} 
     block content
       p This is default

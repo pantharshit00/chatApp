@@ -43,7 +43,11 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-  
+
+if(process.env.NODE_ENV == "production"){
+  app.use(morgan('combined'))
+}
+
 let avatars = [
     "https://semantic-ui.com/images/avatar/small/matt.jpg",
     "https://semantic-ui.com/images/avatar/small/elliot.jpg",

@@ -1,7 +1,8 @@
 let online = [];
+let typers = [];
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-
+const m = require('moment');
 
 let avatars = [
     "https://semantic-ui.com/images/avatar/small/matt.jpg",
@@ -18,6 +19,7 @@ let avatars = [
 
 module.exports = function(io){
  io.sockets.on('connection',function(socket){
+    socket.emit('get_typers_count',{typers})
     socket.emit('get_id', null);
     socket.on('set_id',(data)=>{
         let pos = online.map(function(e) { return e.data.id; }).indexOf(data.id);
@@ -38,7 +40,24 @@ module.exports = function(io){
             aid: sender.acount,
             name: sender.name,
             message: data.message,
-            date: '5:30pm'
+            date: m(Date.now()).format('hh:mma')
+        })
+    })
+    socket.on('type',(data)=>{
+        console.log(data);
+        typers.push(data.name)
+        io.emit('typing',{
+            typers
+        })
+    })
+    socket.on('rm_typer',function(data){
+        var index = typers.indexOf(data.name);
+        if(index > -1){
+            typers.splice(index,1);
+        }
+        console.log(typers);
+        io.emit('typing',{
+            typers
         })
     })
  })   
