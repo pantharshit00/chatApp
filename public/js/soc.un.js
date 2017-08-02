@@ -49,9 +49,9 @@ $(function () {
 
     $('#ms').on('keyup', function (e) {
         console.log("TRIG");
-        if(!this.value){
-            socket.emit('rm_typer',{
-                name:window.name
+        if (!this.value) {
+            socket.emit('rm_typer', {
+                name: window.name
             });
         }
         if (typers.indexOf(window.name) == -1) {
@@ -63,8 +63,10 @@ $(function () {
         }
     })
 
-    $('#ms').on('blur', function (e) {
-        console.log(e);
+    $("#sub-b").on('click', function (e) {
+        socket.emit('rm_typer', {
+            name: window.name
+        });
     })
 });
 
@@ -76,7 +78,7 @@ socket.on('typing', function (data) {
 
 function showTypers(typers) {
     $('#typers').html('');
-    if(typers.length == 0){
+    if (typers.length == 0) {
         return;
     }
     if (typers.length == 1) {

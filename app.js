@@ -10,7 +10,6 @@ const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const promisify = require('es6-promisify')
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const routes = require('./routes/index');
 const validator = require('express-validator');
@@ -32,12 +31,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
   secret: process.env.SECRET,
   key:process.env.KEY,
-  resave: true,
-  saveUninitialized: false,
+  resave: false,
+  saveUninitialized: true,
+  cookie:{
+    maxAge: 2592000000
+  },
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
-
-app.use(cookieParser());
 
 app.use(flash());
 

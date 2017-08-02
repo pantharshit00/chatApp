@@ -2,7 +2,7 @@ let online = [];
 let typers = [];
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const m = require('moment');
+var m = require('moment-timezone');
 
 let avatars = [
     "https://semantic-ui.com/images/avatar/small/matt.jpg",
@@ -40,7 +40,7 @@ module.exports = function(io){
             aid: sender.acount,
             name: sender.name,
             message: data.message,
-            date: m(Date.now()).format('hh:mma')
+            date: m(Date.now()).tz('Asia/Kolkata').format('hh:mma')
         })
     })
     socket.on('type',(data)=>{
